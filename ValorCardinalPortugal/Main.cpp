@@ -3,7 +3,9 @@
 #include "ValorCardinalPortugal.h"
 #include "UtilFunctions.h"
 
-#define TEST
+//#define TEST
+
+const string VERSION = "1.0.8";
 
 int main(int argc, char* argv[])
 {
@@ -34,25 +36,17 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	//printf("\n");
-	//printf("ValorCardinalPortugal (Version: %s)\n", VERSION);
-	//printf("======================================\n");
-	//printf("\n");
+	cout << endl << "ValorCardinalPortugal (Version: " << VERSION << ")" << endl;
+	cout << "======================================" << endl << endl;
 
-	//char str[255];
-	//printf("Introduza valor '#0.00': ");
-	//scanf("%s", str);
+	string valor;
+	cout << "Introduza valor '#0.00': ";
+	cin >> valor; // str; 
 
-	//printf("\nProcessa :[%s]\n", str);
+	cout << "Processa :[" << valor << "]" << endl;
 
-	//char* valor = str;
-	////char *valor = &str;
+	string result = Converte(valor, vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
+	cout << endl << "Resultado:[" << result << "]" << endl;
 
-	//char* result = converte(valor, vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
-	//printf("\nResultado:[%s]\n", result);
-
-	//printf("\nEnter\n");
-	//getchar();
-
-	//return 0;
+	return 0;
 }
