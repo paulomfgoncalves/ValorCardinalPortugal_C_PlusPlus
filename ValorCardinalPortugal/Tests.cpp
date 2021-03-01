@@ -1,9 +1,7 @@
 
 #include "Tests.h"
-#include "UtilFunctions.h"
-#include "ValorCardinalPortugal.h"
 
-void tests()
+void Tests::ExecuteAll()
 {
     cout << "Tests Begin..." << endl;
 
@@ -38,266 +36,268 @@ void tests()
     cout << "Tests End..." << endl;
 }
 
-void test_strcopy()
+void Tests::test_strcopy()
 {
+    UtilFunctions utils;
+
     cout << "testing function: strcopy" << endl;
     string input = "AABBCCDDEEFF";
-    string output = strcopy(input);
+    string output = m_utilFunctions.strcopy(input);
     if (output.compare("AABBCCDDEEFF") != 0)
         cout << "ERROR testing function: strcopy (0)" << endl;
 }
 
-void test_leftpad()
+void Tests::test_leftpad()
 {
     cout << "testing function: leftpad" << endl;
     string input = "123";
-    string output = padleft(input, 'A', 10);
+    string output = m_utilFunctions.padleft(input, 'A', 10);
     if (output.compare("AAAAAAA123") != 0)
         cout << "ERROR testing function: leftpad (0)" << endl;
 
-    string output1 = padleft(input, 'A', 3);
+    string output1 = m_utilFunctions.padleft(input, 'A', 3);
     if (output1.compare("123") != 0)
         cout << "ERROR testing function: leftpad (1)" << endl;
 }
 
-void test_substring()
+void Tests::test_substring()
 {
     cout << "testing function: substring" << endl;
     string input = "123456789";
-    string output = substring(input, 5, 7);
+    string output = m_utilFunctions.substring(input, 5, 7);
     if (output.compare("67") != 0)
         cout << "ERROR testing function: substring" << endl;
 }
 
-void test_indexof()
+void Tests::test_indexof()
 {
     cout << "testing function: indexof" << endl;
-    size_t pos = indexof("alfabetazulu", "beta");
+    size_t pos = m_utilFunctions.indexof("alfabetazulu", "beta");
     if (pos != 4)
         cout << "ERROR testing function: indexof" << endl;
 }
 
-void test_strltrim()
+void Tests::test_strltrim()
 {
     cout << "testing function: strltrim" << endl;
-    string output = leftTrim("   alfabetazulu");
+    string output = m_utilFunctions.leftTrim("   alfabetazulu");
     if (output.compare("alfabetazulu") != 0)
         cout << "ERROR testing function: strltrim (0)" << endl;
 
-    string output1 = leftTrim("");
+    string output1 = m_utilFunctions.leftTrim("");
     if (output1.compare("") != 0)
         cout << "ERROR testing function: strltrim (1)" << endl;
 
-    string output2 = leftTrim("   ");
+    string output2 = m_utilFunctions.leftTrim("   ");
     if (output2.compare("") != 0)
         cout << "ERROR testing function: strltrim (2)" << endl;
 }
 
-void test_strrtrim()
+void Tests::test_strrtrim()
 {
     cout << "testing function: strrtrim" << endl;
-    string output = rightTrim("alfabetazulu   ");
+    string output = m_utilFunctions.rightTrim("alfabetazulu   ");
     if (output.compare("alfabetazulu") != 0)
         cout << "ERROR testing function: strrtrim (0)" << endl;
 
-    string output1 = rightTrim("");
+    string output1 = m_utilFunctions.rightTrim("");
     if (output1.compare("") != 0)
         cout << "ERROR testing function: strrtrim (1)" << endl;
 
-    string output2 = rightTrim("   ");
+    string output2 = m_utilFunctions.rightTrim("   ");
     if (output2.compare("") != 0)
         cout << "ERROR testing function: strrtrim (2)" << endl;
 }
 
-void test_strtrim()
+void Tests::test_strtrim()
 {
     cout << "testing function: strtrim" << endl;
-    string output = trimString("   alfabetazulu   ");
+    string output = m_utilFunctions.trimString("   alfabetazulu   ");
     if (output.compare("alfabetazulu") != 0)
         cout << "ERROR testing function: strtrim (0)" << endl;
 
-    string output1 = trimString("");
+    string output1 = m_utilFunctions.trimString("");
     if (output1.compare("") != 0)
         cout << "ERROR testing function: strtrim (1)" << endl;
 
-    string output2 = trimString("   ");
+    string output2 = m_utilFunctions.trimString("   ");
     if (output2.compare("") != 0)
         cout << "ERROR testing function: strtrim (2)" << endl;
 }
 
-void test_strupper()
+void Tests::test_strupper()
 {
     cout << "testing function: strupper" << endl;
-    string output = strupper("alfa12345zulu");
+    string output = m_utilFunctions.strupper("alfa12345zulu");
     if (output.compare("ALFA12345ZULU") != 0)
         cout << "ERROR testing function: strupper (0)" << endl;
 }
 
-// /////////
+///////////
 
-void test_validaValor()
+void Tests::test_validaValor()
 {
     cout << "testing function: ValidaValor" << endl;
 
-    bool ok = ValidaValor("123456.89");
+    bool ok = m_valorCardinal.ValidaValor("123456.89");
     if (!ok)
         cout << "ERROR testing function: ValidaValor (0)" << endl;
 
-    ok = ValidaValor("123.456.89");
+    ok = m_valorCardinal.ValidaValor("123.456.89");
     if (ok)
         cout << "ERROR testing function: ValidaValor (1)" << endl;
 }
 
-void test_formataValor()
+void Tests::test_formataValor()
 {
     cout << "testing function: FormataValor" << endl;
-    //char *valor101 = "123.89";
-    string output = FormataValor("123.89");
+
+    string output = m_valorCardinal.FormataValor("123.89");
     if (output.compare("123.89") != 0)
         cout << "ERROR testing function: FormataValor (0)" << endl;
 
-    string output1 = FormataValor("123.8");
+    string output1 = m_valorCardinal.FormataValor("123.8");
     if (output1.compare("123.80") != 0)
         cout << "ERROR testing function: FormataValor (1)" << endl;
 
-    string output2 = FormataValor("123.");
+    string output2 = m_valorCardinal.FormataValor("123.");
     if (output2.compare("123.00") != 0)
         cout << "ERROR testing function: FormataValor (2)" << endl;
 
-    string output3 = FormataValor(".");
+    string output3 = m_valorCardinal.FormataValor(".");
     if (output3.compare("0.00") != 0)
         cout << "ERROR testing function: FormataValor (3)" << endl;
 
-    string output4 = FormataValor("0.");
+    string output4 = m_valorCardinal.FormataValor("0.");
     if (output4.compare("0.00") != 0)
         cout << "ERROR testing function: FormataValor (4)" << endl;
 
-    string output5 = FormataValor("");
+    string output5 = m_valorCardinal.FormataValor("");
     if (output5.compare("0.00") != 0)
         cout << "ERROR testing function: FormataValor (5)" << endl;
 
-    string output6 = FormataValor("123");
+    string output6 = m_valorCardinal.FormataValor("123");
     if (output6.compare("123.00") != 0)
         cout << "ERROR testing function: FormataValor (6)" << endl;
 }
 
-void test_valorNegativo()
+void Tests::test_valorNegativo()
 {
     cout << "testing function: ValorNegativo" << endl;
-    bool negativo = ValorNegativo("-123456.89");
+    bool negativo = m_valorCardinal.ValorNegativo("-123456.89");
     if (!negativo)
         cout << "ERROR testing function: ValorNegativo (1)" << endl;
 
-    negativo = ValorNegativo("123456.89");
+    negativo = m_valorCardinal.ValorNegativo("123456.89");
     if (negativo)
         cout << "ERROR testing function: ValorNegativo (3)" << endl;
 }
 
-// /////
+///////
 
-void test_adicionaSufixoDeGrupoMil()
+void Tests::test_adicionaSufixoDeGrupoMil()
 {
     cout << "testing function: AdicionaSufixoDeGrupoMil" << endl;
     string input = "oito";
-    string output = AdicionaSufixoDeGrupoMil(input, 2);
+    string output = m_valorCardinal.AdicionaSufixoDeGrupoMil(input, 2);
     if (output.compare("oito milhões") != 0)
         cout << "ERROR testing function: AdicionaSufixoDeGrupoMil" << endl;
 }
 
-void test_obtemQualificadorParteDecimal()
+void Tests::test_obtemQualificadorParteDecimal()
 {
     cout << "testing function: ObtemQualificadorParteDecimal" << endl;
     string input = "123";
-    string output = ObtemQualificadorParteDecimal(input, false);
+    string output = m_valorCardinal.ObtemQualificadorParteDecimal(input, false);
     if (output.compare("centimos") != 0)
         cout << "ERROR testing function: ObtemQualificadorParteDecimal" << endl;
 }
 
-void test_obtemQualificadorParteInteira()
+void Tests::test_obtemQualificadorParteInteira()
 {
     cout << "testing function: ObtemQualificadorParteInteira" << endl;
     string input = "123";
-    string output = ObtemQualificadorParteInteira(input, false);
+    string output = m_valorCardinal.ObtemQualificadorParteInteira(input, false);
     if (output.compare("euros") != 0)
         cout << "ERROR testing function: ObtemQualificadorParteInteira" << endl;
 }
 
-void test_obtemCentenas()
+void Tests::test_obtemCentenas()
 {
     cout << "testing function: ObtemCentenas" << endl;
-    string output = ObtemCentenas(2, 1, 3);
+    string output = m_valorCardinal.ObtemCentenas(2, 1, 3);
     if (output.compare("duzentos") != 0)
         cout << "ERROR testing function: ObtemCentenas (1)" << endl;
 
-    output = ObtemCentenas(1, 0, 0);  //new
+    output = m_valorCardinal.ObtemCentenas(1, 0, 0);  //new
     if (output.compare("cem") != 0) //new
         cout << "ERROR testing function: ObtemCentenas (2)" << endl; //new
 }
 
-void test_obtemDezenas()
+void Tests::test_obtemDezenas()
 {
     cout << "testing function: ObtemDezenas" << endl;
-    string output = ObtemDezenas(1, 2);
+    string output = m_valorCardinal.ObtemDezenas(1, 2);
     if (output.compare("doze") != 0)
         cout << "ERROR testing function: ObtemDezenas (1)" << endl;
 
-    output = ObtemDezenas(2, 1); //new
+    output = m_valorCardinal.ObtemDezenas(2, 1); //new
     if (output.compare("vinte") != 0) //new
         cout << "ERROR testing function: ObtemDezenas (2)" << endl; //new
 }
 
-void test_obtemUnidades()
+void Tests::test_obtemUnidades()
 {
     cout << "testing function: ObtemUnidades" << endl;
-    string output = ObtemUnidades(8, 2);
+    string output = m_valorCardinal.ObtemUnidades(8, 2);
     if (output.compare("oito") != 0)
         cout << "ERROR testing function: ObtemUnidades (1)" << endl;
 
-   output = ObtemUnidades(8, 1); //new
+   output = m_valorCardinal.ObtemUnidades(8, 1); //new
     if (output.compare("") != 0) //new
         cout << "ERROR testing function: ObtemUnidades (2)" << endl; //new
 
 }
 
-void test_juntaCentenasDezenasUnidades()
+void Tests::test_juntaCentenasDezenasUnidades()
 {
     cout << "testing function: JuntaCentenasDezenasUnidades" << endl;
-    string output = JuntaCentenasDezenasUnidades("oitocentos", "setenta", "seis");
+    string output = m_valorCardinal.JuntaCentenasDezenasUnidades("oitocentos", "setenta", "seis");
     if (output.compare("oitocentos e setenta e seis") != 0)
         cout << "ERROR testing function: JuntaCentenasDezenasUnidades" << endl;
 }
 
-void test_descodificaCardinal()
+void Tests::test_descodificaCardinal()
 {
     cout << "testing function: DescodificaCardinal" << endl;
-    string output = DescodificaCardinal("123", 2);
+    string output = m_valorCardinal.DescodificaCardinal("123", 2);
     if (output.compare("cento e vinte e três milhões") != 0)
         cout << "ERROR testing function: DescodificaCardinal" << endl;
 }
 
-void test_removeUltimasVirgulasEmExcesso()
+void Tests::test_removeUltimasVirgulasEmExcesso()
 {
     cout << "testing function: RemoveUltimasVirgulasEmExcesso" << endl;
-    string output = RemoveUltimasVirgulasEmExcesso("123456789, , , ");
+    string output = m_valorCardinal.RemoveUltimasVirgulasEmExcesso("123456789, , , ");
     if (output.compare("123456789") != 0)
         cout << "ERROR testing function: RemoveUltimasVirgulasEmExcesso" << endl;
 }
 
-void test_juntaTodosGruposDeMil()
+void Tests::test_juntaTodosGruposDeMil()
 {
     cout << "testing function: JuntaTodosGruposDeMil" << endl;
 
     vector<string> phrases = { "alfa", "beta", "zulu" };
-    string output = JuntaTodosGruposDeMil(phrases, false);
+    string output = m_valorCardinal.JuntaTodosGruposDeMil(phrases, false);
     if (output.compare("alfa, beta e zulu") != 0)
         cout << "ERROR testing function: JuntaTodosGruposDeMil" << endl;
 }
 
-void test_divideEmGruposDeMil()
+void Tests::test_divideEmGruposDeMil()
 {
     cout << "testing function: DivideEmGruposDeMil" << endl;
 
-    vector<string> resultado = DivideEmGruposDeMil("123456789012345");
+    vector<string> resultado = m_valorCardinal.DivideEmGruposDeMil("123456789012345");
     int sizegrp = resultado.size();
 
     if (sizegrp != 5)
@@ -320,11 +320,11 @@ void test_divideEmGruposDeMil()
         cout << "ERROR testing function: DivideEmGruposDeMil (4)" << endl;
 }
 
-void test_divideEmPartesInteiraDecimal()
+void Tests::test_divideEmPartesInteiraDecimal()
 {
     cout << "testing function: DivideEmPartesInteiraDecimal" << endl;
 
-    vector<string> resultado = DivideEmPartesInteiraDecimal("1234567.89");
+    vector<string> resultado = m_valorCardinal.DivideEmPartesInteiraDecimal("1234567.89");
     string p10 = resultado[0];
     string p11 = resultado[1];
     if (p10.compare("1234567") != 0)
@@ -333,11 +333,11 @@ void test_divideEmPartesInteiraDecimal()
         cout << "ERROR testing function: DivideEmPartesInteiraDecimal (1)" << endl;
 }
 
-void test_converte(void)
+void Tests::test_converte(void)
 {
     cout << "testing function: Converte" << endl;
     string input = "123456789.87";
-    string output = Converte(input, false, false);
+    string output = m_valorCardinal.Converte(input, false, false);
     if (output.compare("cento e vinte e três milhões, quatrocentos e cinquenta e seis mil, setecentos e oitenta e nove euros e oitenta e sete centimos") != 0)
         cout << "ERROR testing function: Converte (0)" << endl;
 }

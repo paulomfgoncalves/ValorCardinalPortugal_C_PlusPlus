@@ -6,8 +6,8 @@
 using namespace std;
 
 #include <string>
-//#include <stdbool.h>
 #include <vector> 
+#include "UtilFunctions.h"
 
 /* macros */
 
@@ -25,27 +25,34 @@ using namespace std;
 #define QUALIFICADOR_DECIMAL_MAX 10
 #define CARDINAL_GRUPOS_PRASE_MAX 128
 
-/* declare functions */
 
-string Converte(const string &valor, bool vazioSeZeroParteinteira = false, bool vazioSeZeroParteDecimail = false);
+class ValorCardinalPortugal
+{
+	friend class Tests;
 
-//partes DivideEmPartesInteiraDecimal(const string &valor);
-vector<string> DivideEmPartesInteiraDecimal(const string& valor);
-//grupoCDU DivideEmGruposDeMil(const string &valor);
-vector<string> DivideEmGruposDeMil(const string& valor);
-string JuntaTodosGruposDeMil(const vector<string> &grouposEmCardinal, bool vazioSeZero);
-string RemoveUltimasVirgulasEmExcesso(const string &valor);
-string DescodificaCardinal(const string &valor, int nivel);
-string JuntaCentenasDezenasUnidades(const string &centena, const string &dezena, const string &unidade);
-string ObtemUnidades(const short digito, const short dezena);
-string ObtemDezenas(const short digito, const short unidade);
-string ObtemCentenas(const short digito, const short dezena, const short unidade);
-string ObtemQualificadorParteDecimal(const string &valor, bool vazioSeZero);
-string ObtemQualificadorParteInteira(const string &valor, bool vazioSeZero);
-string AdicionaSufixoDeGrupoMil(const string &valor, int nivel);
-bool ValidaValor(const string &valor);
-string FormataValor(const string &valor);
-bool ValorNegativo(const string &valor);
+public:
+	UtilFunctions m_utilFunctions;
+
+public:
+	string Converte(const string& valor, bool vazioSeZeroParteinteira = false, bool vazioSeZeroParteDecimail = false);
+
+private:
+	vector<string> DivideEmPartesInteiraDecimal(const string& valor);
+	vector<string> DivideEmGruposDeMil(const string& valor);
+	string JuntaTodosGruposDeMil(const vector<string>& grouposEmCardinal, bool vazioSeZero);
+	string RemoveUltimasVirgulasEmExcesso(const string& valor);
+	string DescodificaCardinal(const string& valor, int nivel);
+	string JuntaCentenasDezenasUnidades(const string& centena, const string& dezena, const string& unidade);
+	string ObtemUnidades(const short digito, const short dezena);
+	string ObtemDezenas(const short digito, const short unidade);
+	string ObtemCentenas(const short digito, const short dezena, const short unidade);
+	string ObtemQualificadorParteDecimal(const string& valor, bool vazioSeZero);
+	string ObtemQualificadorParteInteira(const string& valor, bool vazioSeZero);
+	string AdicionaSufixoDeGrupoMil(const string& valor, int nivel);
+	bool ValidaValor(const string& valor);
+	string FormataValor(const string& valor);
+	bool ValorNegativo(const string& valor);
+};
 
 #endif // VALORCARDINALPORTUGALCALL_H_INCLUDED
 

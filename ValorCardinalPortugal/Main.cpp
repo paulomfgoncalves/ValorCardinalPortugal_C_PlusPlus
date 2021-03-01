@@ -1,37 +1,38 @@
 
 #include "Main.h"
-#include "ValorCardinalPortugal.h"
-#include "UtilFunctions.h"
 
-//#define TEST
-
-const string VERSION = "1.0.8";
 
 int main(int argc, char* argv[])
 {
+	const string VERSION = "1.0.8";
+
 	#ifdef TEST
-		tests();
+		Tests tests;
+		tests.ExecuteAll();
 		return 0;
 	#endif
 
 	bool vazioSeZeroParteinteira = false;
 	bool vazioSeZeroParteDecimal = false;
 
+	UtilFunctions m_utilFunctions;
+	ValorCardinalPortugal m_valorCardinalPortugal;
+
 	if (argc >= 3)
 	{
-		string temp = strupper(argv[2]);
+		string temp = m_utilFunctions.strupper(argv[2]);
 		vazioSeZeroParteinteira = (temp.compare("TRUE") == 0);
 	}
 
 	if (argc >= 4)
 	{
-		string temp = strupper(argv[3]);
+		string temp = m_utilFunctions.strupper(argv[3]);
 		vazioSeZeroParteDecimal = (temp.compare("TRUE") == 0);
 	}
 
 	if (argc >= 2)
 	{
-		string result = Converte(argv[1], vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
+		string result = m_valorCardinalPortugal.Converte(argv[1], vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
 		cout << "[" + result + "]" << endl;
 		return 0;
 	}
@@ -45,7 +46,7 @@ int main(int argc, char* argv[])
 
 	cout << "Processa :[" << valor << "]" << endl;
 
-	string result = Converte(valor, vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
+	string result = m_valorCardinalPortugal.Converte(valor, vazioSeZeroParteinteira, vazioSeZeroParteDecimal);
 	cout << endl << "Resultado:[" << result << "]" << endl;
 
 	return 0;

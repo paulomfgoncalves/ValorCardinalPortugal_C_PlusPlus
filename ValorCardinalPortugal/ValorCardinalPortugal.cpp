@@ -1,6 +1,6 @@
 
 #include "ValorCardinalPortugal.h"
-#include "UtilFunctions.h"
+//#include "UtilFunctions.h"
 
 /* constants */
 
@@ -41,9 +41,9 @@ const string FRASE_ESPACO = " ";
 /* Implementation */
 /* ************** */
 
-string Converte(const string &valor, bool vazioSeZeroParteinteira, bool vazioSeZeroParteDecimail)
+string ValorCardinalPortugal::Converte(const string &valor, bool vazioSeZeroParteinteira, bool vazioSeZeroParteDecimail)
 {
-    string valorTrim = trimString(valor);
+    string valorTrim = m_utilFunctions.trimString(valor);
 
     // validatição e formatação do impute
     if (!ValidaValor(valorTrim))
@@ -126,7 +126,7 @@ string Converte(const string &valor, bool vazioSeZeroParteinteira, bool vazioSeZ
     return resultdofinal;
 }
 
-vector<string> DivideEmPartesInteiraDecimal(const string &valor)
+vector<string> ValorCardinalPortugal::DivideEmPartesInteiraDecimal(const string &valor)
 {
     size_t pos = valor.find('.');
     size_t len = valor.length();
@@ -143,7 +143,7 @@ vector<string> DivideEmPartesInteiraDecimal(const string &valor)
 }
 
 //grupoCDU DivideEmGruposDeMil(const string& valor)
-vector<string> DivideEmGruposDeMil(const string &valor)
+vector<string> ValorCardinalPortugal::DivideEmGruposDeMil(const string &valor)
 {
     string temp = valor;
 
@@ -161,7 +161,7 @@ vector<string> DivideEmGruposDeMil(const string &valor)
         temp = temp.substr(0, temp.length() - 3);
     }
 
-    list.push_back(padleft(temp, '0', 3)); //garante comprimento = 3  AQUI
+    list.push_back(m_utilFunctions.padleft(temp, '0', 3)); //garante comprimento = 3  AQUI
 
     //salva
     //grupoCDU grupoCDU;
@@ -178,7 +178,7 @@ vector<string> DivideEmGruposDeMil(const string &valor)
 
     return grupos;
 }
-string JuntaTodosGruposDeMil(const vector<string> &grouposEmCardinal, bool vazioSeZero)
+string ValorCardinalPortugal::JuntaTodosGruposDeMil(const vector<string> &grouposEmCardinal, bool vazioSeZero)
 {
     string resultado = "";
     int length = grouposEmCardinal.size();
@@ -211,7 +211,7 @@ string JuntaTodosGruposDeMil(const vector<string> &grouposEmCardinal, bool vazio
     return resultado;
 }
 
-string RemoveUltimasVirgulasEmExcesso(const string &valor)
+string ValorCardinalPortugal::RemoveUltimasVirgulasEmExcesso(const string &valor)
 {
     if (valor.length() < 2)
         return valor;
@@ -224,7 +224,7 @@ string RemoveUltimasVirgulasEmExcesso(const string &valor)
     return resultado;
 }
 
-string DescodificaCardinal(const string &valor, int nivel)
+string ValorCardinalPortugal::DescodificaCardinal(const string &valor, int nivel)
 {
     if (valor.compare("000") == 0)
         return "";
@@ -246,7 +246,7 @@ string DescodificaCardinal(const string &valor, int nivel)
     return resultado;
 }
 
-string JuntaCentenasDezenasUnidades(const string &centena, const string &dezena, const string &unidade)
+string ValorCardinalPortugal::JuntaCentenasDezenasUnidades(const string &centena, const string &dezena, const string &unidade)
 {
     string resultado = centena;
 
@@ -262,7 +262,7 @@ string JuntaCentenasDezenasUnidades(const string &centena, const string &dezena,
     return resultado;
 }
 
-string ObtemUnidades(const short digito, const short dezena)
+string ValorCardinalPortugal::ObtemUnidades(const short digito, const short dezena)
 {
     if (dezena == 1)
         return "";
@@ -270,7 +270,7 @@ string ObtemUnidades(const short digito, const short dezena)
     return CARDINAL_UNIDADES[digito];
 }
 
-string ObtemDezenas(const short digito, const short unidade)
+string ValorCardinalPortugal::ObtemDezenas(const short digito, const short unidade)
 {
     if (digito == 1)
         return CARDINAL_DEZENAS_DEZ[unidade];
@@ -278,7 +278,7 @@ string ObtemDezenas(const short digito, const short unidade)
     return CARDINAL_DEZENAS[digito];
 }
 
-string ObtemCentenas(const short digito, const short dezena, const short unidade)
+string ValorCardinalPortugal::ObtemCentenas(const short digito, const short dezena, const short unidade)
 {
     if ((digito == 1) && (dezena == 0) && (unidade == 0))
         return CARDINAL_CEM; //Caso : Cem
@@ -286,7 +286,7 @@ string ObtemCentenas(const short digito, const short dezena, const short unidade
     return CARDINAL_CENTENAS[digito];
 }
 
-string ObtemQualificadorParteDecimal(const string &valor, bool vazioSeZero)
+string ValorCardinalPortugal::ObtemQualificadorParteDecimal(const string &valor, bool vazioSeZero)
 {
     double valTemp = atof(valor.c_str());
 
@@ -302,7 +302,7 @@ string ObtemQualificadorParteDecimal(const string &valor, bool vazioSeZero)
     return "";
 }
 
-string ObtemQualificadorParteInteira(const string &valor, bool vazioSeZero)
+string ValorCardinalPortugal::ObtemQualificadorParteInteira(const string &valor, bool vazioSeZero)
 {
     double valTemp = atof(valor.c_str());
 
@@ -318,7 +318,7 @@ string ObtemQualificadorParteInteira(const string &valor, bool vazioSeZero)
     return "";
 }
 
-string AdicionaSufixoDeGrupoMil(const string &valor, int nivel)
+string ValorCardinalPortugal::AdicionaSufixoDeGrupoMil(const string &valor, int nivel)
 {
     string resultado = "";
 
@@ -353,7 +353,7 @@ string AdicionaSufixoDeGrupoMil(const string &valor, int nivel)
     return resultado;
 }
 
-bool ValidaValor(const string &valor)
+bool ValorCardinalPortugal::ValidaValor(const string &valor)
 {
     if (valor.length() == 0)
         return true;
@@ -389,7 +389,7 @@ bool ValidaValor(const string &valor)
     return true;
 }
 
-string FormataValor(const string &valor)
+string ValorCardinalPortugal::FormataValor(const string &valor)
 {
     if (valor.length() == 0)
         return "0.00";
@@ -411,10 +411,10 @@ string FormataValor(const string &valor)
     else
         result = result.substr(0, pos + 3);
 
-    return trimString(result);
+    return m_utilFunctions.trimString(result);
 }
 
-bool ValorNegativo(const string &valor)
+bool ValorCardinalPortugal::ValorNegativo(const string &valor)
 {
     return (valor.substr(0, 1).compare("-") == 0);
 }

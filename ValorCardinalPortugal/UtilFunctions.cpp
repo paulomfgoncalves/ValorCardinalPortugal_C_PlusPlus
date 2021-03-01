@@ -1,28 +1,28 @@
 
 #include "UtilFunctions.h"
 
-string strcopy(const string &src)
+string UtilFunctions::strcopy(const string &src)
 {
     string result(src);
 
     return result;
 }
 
-string substring(const string &src, const int begin, const int end)
+string UtilFunctions::substring(const string &src, const int begin, const int end)
 {
     string result = src.substr(begin, (end - begin));
 
     return result;
 }
 
-size_t indexof(const string &src, const string &phrase)
+size_t UtilFunctions::indexof(const string &src, const string &phrase)
 {
     size_t result = src.find(phrase, 0);
 
     return result;
 }
 
-string padleft(const string &src, const char fill, const int length)
+string UtilFunctions::padleft(const string &src, const char fill, const int length)
 {
     string result(src);
 
@@ -32,7 +32,7 @@ string padleft(const string &src, const char fill, const int length)
     return result;
 }
 
-string leftTrim(const string &str)
+string UtilFunctions::leftTrim(const string &str)
 {
     string result(str);
 
@@ -41,7 +41,7 @@ string leftTrim(const string &str)
     return result;
 }
 
-string rightTrim(const string &str)
+string UtilFunctions::rightTrim(const string &str)
 {
     string result(str);
 
@@ -50,7 +50,7 @@ string rightTrim(const string &str)
     return result;
 }
 
-string trimString(const string &str)
+string UtilFunctions::trimString(const string &str)
 {
     string temp = rightTrim(str);
     string result = leftTrim(temp);
@@ -58,7 +58,7 @@ string trimString(const string &str)
     return result;
 }
 
-string strupper(const string &str)
+string UtilFunctions::strupper(const string &str)
 {
     string result = str;
 
