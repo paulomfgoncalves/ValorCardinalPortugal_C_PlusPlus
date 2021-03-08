@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-	const string VERSION = "1.0.8";
+	const string VERSION = "1.0.9";
 
 	#ifdef TEST
 		Tests tests;

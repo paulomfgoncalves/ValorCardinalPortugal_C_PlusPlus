@@ -1,10 +1,10 @@
 
 #include "ValorCardinalPortugal.h"
-//#include "UtilFunctions.h"
 
+/* ********* */
 /* constants */
+/* ********* */
 
-//length of char array = max length worlds + 1 (\0)
 const string CARDINAL_UNIDADES[CARDINAL_MAX] = { "", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove" };
 const string CARDINAL_DEZENAS[CARDINAL_MAX] = { "", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa" };
 const string CARDINAL_DEZENAS_DEZ[CARDINAL_MAX] = { "dez", "onze", "doze", "treze", "catorze", "quinze", "desasseis", "desassete", "dezoito", "dezanove" };
@@ -49,7 +49,7 @@ string ValorCardinalPortugal::Converte(const string &valor, bool vazioSeZeroPart
     if (!ValidaValor(valorTrim))
         return "ERRO: não é um valor valido: " + valor;
 
-    string valorForm = FormataValor(valor);
+    string valorForm = FormataValor(valorTrim);
 
     // inicio
     bool negativo = ValorNegativo(valorForm);
@@ -135,40 +135,23 @@ vector<string> ValorCardinalPortugal::DivideEmPartesInteiraDecimal(const string 
     partes.push_back(valor.substr(0, pos));
     partes.push_back(valor.substr(pos + 1, len - pos));
 
-    //Partes partes;
-    //partes.array[0] = valor.substr( 0, pos);
-    //partes.array[1] = valor.substr(pos + 1, len - pos);
-
     return partes;
 }
 
-//grupoCDU DivideEmGruposDeMil(const string& valor)
 vector<string> ValorCardinalPortugal::DivideEmGruposDeMil(const string &valor)
 {
     string temp = valor;
-
     vector<string> list;
-    //string array[GRUPO_CDU_ARRAY_MAX];
-    //int grp = 0;
 
     //extrai
     while (temp.length() > 3)
     {
         string str3 = temp.substr(temp.length() - 3); //3 ultimos
-
         list.push_back(str3);
-        //grp++;
         temp = temp.substr(0, temp.length() - 3);
     }
 
-    list.push_back(m_utilFunctions.padleft(temp, '0', 3)); //garante comprimento = 3  AQUI
-
-    //salva
-    //grupoCDU grupoCDU;
-
-    //clear arrays
-    //for (int i = 0; i < GRUPO_CDU_ARRAY_MAX; i++) //aqui malloc + memset   -> nao parece ser preciso
-    //    grupo->array[i] = '\0';
+    list.push_back(m_utilFunctions.padleft(temp, '0', 3)); //garante comprimento = 3
 
     // reverte array
     size_t  grp = list.size();
@@ -178,6 +161,7 @@ vector<string> ValorCardinalPortugal::DivideEmGruposDeMil(const string &valor)
 
     return grupos;
 }
+
 string ValorCardinalPortugal::JuntaTodosGruposDeMil(const vector<string> &grouposEmCardinal, bool vazioSeZero)
 {
     string resultado = "";
